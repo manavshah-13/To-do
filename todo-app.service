@@ -1,0 +1,40 @@
+[Unit]
+Description=To-Do List Application Container
+Documentation=https://github.com/Kritika30032002/To-Do-List-Application
+After=docker.service network-online.target
+Requires=docker.service
+Wants=network-online.target
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=10s
+TimeoutStartSec=300
+WorkingDirectory=/opt/todo-app
+EnvironmentFile=-/opt/todo-app/.env
+
+# Clean up existing container instance before starting
+ExecStartPre=-/usr/bin/docker stop todo-app
+ExecStartPre=-/usr/bin/docker rm todo-app
+
+# Pull the latest verified release from Amazon ECR
+ExecStartPre=/bin/sh -c 'if [ -n "$AWS_ACCOUNT_ID" ] && [ -n "$AWS_REGION" ]; then aws ecr get-login-password --region $AWS_REGION | docker login --username AWS --password-stdin ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com; docker pull ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/todo-list-app:latest; fi'
+
+# Start the application container bound to localhost:8080 (proxied by host NGINX)
+ExecStart=/usr/bin/docker run --name todo-app \
+    --rm \
+    --env-file /opt/todo-app/.env \
+    -p 127.0.0.1:8080:80 \
+    todo-list-app:latest
+
+ExecStop=/usr/bin/docker stop -t 10 todo-app
+
+# Resource limits & Process isolation
+LimitNOFILE=65536
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=todo-app
+
+[Install]
+WantedBy=multi-user.target
+

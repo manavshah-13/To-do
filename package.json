@@ -1,0 +1,22 @@
+{
+  "name": "to-do-list-application",
+  "version": "1.0.0",
+  "description": "Production-ready To-Do List Application",
+  "main": "index.js",
+  "scripts": {
+    "start": "npx --yes serve -l 8080 .",
+    "test": "node -e \"console.log('Validating critical files...'); ['index.html', 'index.js', 'style.css', 'scroll.js', 'env-config.js'].forEach(f => require('fs').accessSync(f)); console.log('All files verified successfully.');\"",
+    "lint": "node --check index.js && node --check scroll.js"
+  },
+  "keywords": [
+    "todo",
+    "productivity",
+    "docker",
+    "aws",
+    "nginx",
+    "ecs"
+  ],
+  "author": "Kritika Gupta",
+  "license": "MIT"
+}
+

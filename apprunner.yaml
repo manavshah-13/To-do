@@ -1,0 +1,21 @@
+version: 1.0
+runtime: custom
+runtime-version: custom
+build:
+  commands:
+    build:
+      - echo "Docker container build handled via ECR image"
+run:
+  runtime-version: custom
+  command: /docker-entrypoint.sh nginx -g "daemon off;"
+  network:
+    port: 80
+    env: APP_PORT
+  env:
+    - name: APP_ENV
+      value: production
+    - name: APP_TITLE
+      value: To-Do List Application
+    - name: ENABLE_VOICE_COMMANDS
+      value: "true"
+

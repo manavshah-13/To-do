@@ -1,0 +1,37 @@
+# Git and Repository metadata
+.git
+.gitignore
+.github
+.vscode
+
+# Environment files and secrets
+.env
+.env.*
+!.env.example
+
+# Large binary / archive files
+*.zip
+Roboto_Slab.zip
+
+# OS metadata
+.DS_Store
+Thumbs.db
+
+# Documentation and Project meta
+*.md
+LICENSE
+
+# Node and dependency artifacts
+node_modules
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Docker & CI/CD artifacts
+Dockerfile
+docker-compose*.yml
+.dockerignore
+task-definition.json
+apprunner.yaml
+todo-app.service
+
