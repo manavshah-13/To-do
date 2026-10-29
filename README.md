@@ -41,7 +41,7 @@ Our to-do list application supports voice command for adding tasks effortlessly.
 Example prompt for adding task using voice command :
  "Add asignment due date 16th Nov priority High" 
 Example prompt for editing tasks : 
- "Edit task assignment to a" (will change the task title from assignment to a " 
+ "Edit task assignment to a" will change the task title from assignment to a " 
 Example prompt for deketing a task : 
  "Delete task assignment"  
 
